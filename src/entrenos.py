@@ -76,3 +76,35 @@ def suma_calorias(entrenos: list[Entreno], f_inicio: str, f_fin: str) -> int:
 
     return suma
 
+def entrenamiento_mas_kms(entrenos: list[Entreno]) -> Entreno:
+    '''
+    Recibe la lista de entrenos y devuelve el entreno
+    con mayor distancia recorrida
+    '''
+    max = entrenos[0]
+    for u in entrenos:
+        if u.distancia > max.distancia:
+            max = u
+    
+    return max
+
+def duracion_media_entrenos(entrenos: list[Entreno], año: int, mes: int) -> int:
+    '''
+    Recibe la lista de entrenos, un año y un mes, y
+    devuelve la duración media de los entrenos en ese
+    mes y año.
+    Si la media no se puede calcular, devuelve None.
+    '''
+    suma = 0
+    num = 0
+    for u in entrenos:
+        año_entreno = u.fechahora.year
+        mes_entreno = u.fechahora.month
+        if año == año_entreno and mes == mes_entreno:
+            suma += u.duracion
+            num += 1
+
+    if num == 0:
+        return None
+    else:
+        return suma / num
